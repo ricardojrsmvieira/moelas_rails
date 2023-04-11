@@ -1,0 +1,35 @@
+
+<%= form_with(model: cocktail, data: {
+    controller: "nested-form",
+    nested_form_wrapper_selector_value: '.nested-form-wrapper'
+}) do |form| %>
+    <% if cocktail.errors.any? %>
+        <div style="color: red">
+            <h2><%= pluralize(project.errors.count, "error") %> prohibited this cocktail because: </h2>
+            <ul>
+                <% project.errors.each do |error| %>
+                    <li><%= error.full_message%></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div>
+        <%= form.label :name, style: "display: block" %>
+        <%= form.text_field :name %>
+    </div>
+    <%###############################################  %>
+    <template data-nested-form-target="template">
+        <%form.fields_for :drinks_cocktails, DrinksCocktail.new, child_index: " NEW_RECORD" do |drinks_cocktails_fields| %>
+            <%= render "drinks_cocktails_form", f: drinks_cocktails_fields %>
+        <% end %>
+    </template>
+    <%= form.fields_for :drinks_cocktails do |drinks_cocktails_fields| %>
+        <%= render "drinks_cocktails_form", f: drinks_cocktails_fields %>
+    <% end %>
+    <div data-nested-form-target="target"></div>
+    <button type="button" data-action=>Add Drink</button> 
+    <%############################## #################  %>
+    <div>
+        <%= form.submit %>
+    </div>
+<% end %>

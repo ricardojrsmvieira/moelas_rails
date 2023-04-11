@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "cocktail" do %>
+    <h2><%= @cocktail.name %></h2>
+    <% @info.each do |inf| %>
+        <h3><%= inf[0] %> : <%= inf[1][0] %></h3>
+    <% end %>
+<% end %>

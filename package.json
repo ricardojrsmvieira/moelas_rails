@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@nathanvda/cocoon": "^1.2.14",
+    "stimulus-rails-nested-form": "^4.1.0"
+  }
+}

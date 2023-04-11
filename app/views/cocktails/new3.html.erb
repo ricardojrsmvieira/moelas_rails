@@ -1,0 +1,27 @@
+<h2>Add a Cocktail</h2>
+
+<%= simple_form_for(@cocktail) do |f| %>
+    <% if @cocktail.errors.any? %>
+        <h3><%= pluralize(@cocktail.errors.size, 'error') %> prevented this cocktail from being saved</h3>
+        <ul>
+            <% @cocktail.errors.full_messages.each do |msg| %>
+                <li> <h4><%= msg %></h4> </li>
+            <% end %>
+        </ul>
+    <% end %>
+    <%= f.input :name %>
+    <br/>
+    <h3>Bebidas</h3>
+    <div id="drinks_cocktails">
+        <%= f.simple_fields_for :drinks_cocktails do |builder| %>
+            <%= render 'drinks_cocktail_fields', f: builder %>
+        <% end %>
+        <div class="links">
+            <%= link_to_add_association 'Add Drink', f, :drinks_cocktails %>
+        </div>
+    </div>
+    <div class="form-actions">
+        <%= f.submit %>
+    </div>
+    <br/>
+<% end %>
